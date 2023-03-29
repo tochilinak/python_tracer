@@ -31,6 +31,38 @@ Output:
 10 RETURN_VALUE None
 ```
 
+### Original interpreter (Python 3.11.2, from sources)
+
+Input:
+
+```
+python3 my_tracer.py f < example.py
+```
+
+Output:
+```
+2 LOAD_FAST None
+4 LOAD_CONST None
+6 COMPARE_OP None
+12 POP_JUMP_FORWARD_IF_FALSE None
+18 LOAD_CONST None
+20 RETURN_VALUE None
+```
+
+Input:
+```
+python3 my_tracer.py f < example1.py
+```
+
+Output:
+```
+2 LOAD_FAST None
+4 LOAD_CONST None
+6 COMPARE_OP None
+12 POP_JUMP_FORWARD_IF_FALSE None
+14 LOAD_CONST None
+16 RETURN_VALUE None
+```
 
 ### Hacked interpreter (Python 3.11)
 
