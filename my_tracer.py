@@ -16,7 +16,7 @@ def tracer(frame, event, arg):
     
     elif event == "opcode":
         instr = frame.f_code.co_code[frame.f_lasti]
-        print(dis.opname[instr], arg)
+        print(frame.f_lasti, dis.opname[instr], arg)
 
     else:
         frame.f_trace_opcodes = False
