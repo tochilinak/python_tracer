@@ -12,11 +12,13 @@ def tracer(frame, event, arg):
         frame.f_trace_opcodes = True
         frame.f_trace_lines = False
         started = True
+        frame.f_globals["___symbolic___ibmviqhlye"] = frame.f_code
         return tracer
-    
+
     elif event == "opcode":
         instr = frame.f_code.co_code[frame.f_lasti]
-        print(frame.f_lasti, dis.opname[instr], arg)
+        print()
+        print(frame.f_lasti, dis.opname[instr], type(arg), arg)
 
     else:
         frame.f_trace_opcodes = False

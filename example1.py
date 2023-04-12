@@ -7,6 +7,7 @@ def f(x):
 
 class MyObject:
     def __eq__(self, other):
+        print("Called eq")
         return MyObject()
 
     def __bool__(self):
