@@ -15,4 +15,4 @@ class MyObject:
         return False
 
 
-args = [MyObject()]
+args = [None]
