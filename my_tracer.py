@@ -1,7 +1,8 @@
 import sys
 import dis
+import builtins
 
-def func(*args):
+def symbolic_handler(*args):
     #print("ARGS:", args, flush=True)
     return None
 
@@ -9,15 +10,17 @@ def func(*args):
 silent = "--silent" in sys.argv
 started = False
 root = "/"
-wrappers = {}
 tab = ""
+adapter = None
+if "___create_symbolic_adapter___ibmviqhlye" in dir(builtins):
+    adapter = ___create_symbolic_adapter___ibmviqhlye(symbolic_handler)
 
 def tracer(frame, event, arg):
     global started, tab
 
-    frame.f_globals["___symbolic___ibmviqhlye"] = frame.f_code
-    frame.f_globals["___wrapper_holder___ibmviqhlye"] = wrappers
-    frame.f_globals["___handler___ibmviqhlye"] = func
+    if frame.f_code.co_name != "symbolic_handler":
+        frame.f_globals["___symbolic___ibmviqhlye"] = frame.f_code
+        frame.f_globals["___adapter___ibmviqhlye"] = adapter
 
     if event == "call": 
         #frame.f_trace_opcodes = True
@@ -45,7 +48,7 @@ def tracer(frame, event, arg):
     elif event == "exception":
         if not silent:
             print()
-            print("EXCEPTION") #, arg)#, arg[1])
+            print("EXCEPTION")#, arg)#, arg[1])
         frame.f_globals["___symbolic___ibmviqhlye"] = None
         if not silent:
             print()
